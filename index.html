@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Recruiter Cold Email Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background-color: #f9f9f9;
+      max-width: 800px;
+      margin: auto;
+    }
+    h2 {
+      color: #2c3e50;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 1rem;
+    }
+    input {
+      width: 100%;
+      padding: 0.6rem;
+      margin-top: 0.3rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 1.2rem;
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 1rem;
+    }
+    #generate {
+      background-color: #3498db;
+      color: white;
+    }
+    #copyBtn {
+      background-color: #2ecc71;
+      color: white;
+    }
+    #gmailBtn {
+      background-color: #f39c12;
+      color: white;
+    }
+    pre {
+      background: #fff;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 8px;
+      white-space: pre-wrap;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Cold Email Generator for SAP IBP Recruiters</h2>
+
+  <label for="company">Company Name:</label>
+  <input id="company" type="text" placeholder="e.g., Deloitte" />
+
+  <label for="role">Role Title:</label>
+  <input id="role" type="text" placeholder="e.g., SAP IBP Consultant" />
+
+  <label for="recruiter">Recruiter Name:</label>
+  <input id="recruiter" type="text" placeholder="e.g., John Doe" />
+
+  <label for="email">Recruiter Email:</label>
+  <input id="email" type="email" placeholder="e.g., john.doe@company.com" />
+
+  <button id="generate" onclick="generateEmail()">Generate Email</button>
+  <button id="copyBtn" onclick="copyEmail()">Copy Email</button>
+  <button id="gmailBtn" onclick="openInGmail()">Open in Gmail</button>
+
+  <pre id="output"></pre>
+
+  <script>
+    let finalSubject = "";
+    let finalBody = "";
+
+    function generateEmail() {
+      const company = document.getElementById("company").value;
+      const role = document.getElementById("role").value;
+      const recruiter = document.getElementById("recruiter").value;
+
+      finalSubject = `SAP IBP Consultant with Accenture – Exploring Opportunities at ${company}`;
+
+      finalBody = `Dear ${recruiter},
+
+I hope this message finds you well.
+
+My name is Naven Ramasamy, and I am a SAP IBP Certified Consultant currently working at Accenture with around 11 months of hands-on experience in SAP IBP for Demand Planning and Embedded AI use cases. I’ve contributed to client projects such as Kao Corporation and Accenture's internal platform (myConcerto), where I led key configuration, forecasting enhancements, and Joule-based automation solutions.
+
+I am writing to express my interest in the ${role} opportunity at ${company}. With a strong foundation in IBP, S4 HANA aATP, and data tools like Power BI and SQL, I bring both technical expertise and business analytics acumen (MBA – Business Analytics, BITS Pilani) to help optimize supply chain operations.
+
+I would greatly appreciate an opportunity to discuss how my skills align with your hiring needs. Please find my resume attached for your reference.
+
+Looking forward to hearing from you.
+
+Warm regards,  
+Naven Ramasamy  
+SAP IBP Consultant | Accenture  
+📧 naven.manjula.ramasamy@gmail.com  
+📞 +91-9629974278  
+🔗 https://www.linkedin.com/in/naven-r`;
+
+      document.getElementById("output").textContent = `Subject: ${finalSubject}\n\n${finalBody}`;
+    }
+
+    function copyEmail() {
+      const textToCopy = `Subject: ${finalSubject}\n\n${finalBody}`;
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("Email copied to clipboard!");
+      });
+    }
+
+    function openInGmail() {
+      const recruiterEmail = document.getElementById("email").value;
+      const subject = encodeURIComponent(finalSubject);
+      const body = encodeURIComponent(finalBody);
+
+      const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=${recruiterEmail}&su=${subject}&body=${body}`;
+      window.open(gmailURL, "_blank");
+    }
+  </script>
+</body>
+</html>
